@@ -1,44 +1,34 @@
-<?php
-class Pegawai{
-    protected $nip;
+<?php 
+class Bank {
+    //member varibale
+    protected $norek;
     public $nama;
-    private $jabatan;
-    private $agama;
-    private $status;
+    private $saldo;
     static $jml = 0;
-    const PT = 'PT. HTP Indonesia';
-
-    public function __construct($nip, $nama, $jabatan, $agama, $status){
-        $this->nip = $nip;
-        $this->nama = $nama;
-        $this->jabatan = $jabatan;
-        $this->agama = $agama;
-        $this->status = $status;
+    const BANK = 'Bank Syariah Indonesia';
+//konstruktor untuk menyimpan variable yang akan dikirimkan ke file object
+    public function __construct($no, $nasabah,$saldo){
+        $this->norek = $no;
+        $this->nama = $nasabah;
+        $this->saldo = $saldo;
         self::$jml++;
+
     }
-    public function setGajiPokok($jabatan){
-        $this->jabatan = $jabatan;
-        switch($jabatan){
-            case 'Manager': $gapok = 15000000; break;
-            case 'Asisten Manager': $gapok = 10000000; break;
-            case 'Kepala Bagian ': $gapok = 7000000; break;
-            case 'Staff ': $gapok = 5000000; break;
-            default: $gapok = 0;
-        }
-        return $gapok;
+    public function setor($uang){
+        $this->saldo += $uang;
+    }
+    public function ambil($uang){
+        $this->saldo -= $uang;
     }
     public function cetak(){
-        echo 'NIP Pegawai '.$this->nip;
-        echo '<br>Nama Pegawai '.$this->nama;
-        echo '<br>Jabatan '. $this->jabatan;
-        echo '<br>Agama '.$this->agama;
-        echo '<br>Status '.$this->status;
-        echo '<br>Gaji Pokok Rp.'.number_format($this->setGajiPokok($this->jabatan),0,',','.');
+        echo '<b><u>'.self::BANK.'</u></b>';
+        echo '<br>No. Rekening :'.$this->norek;
+        echo '<br>Nama Nasabah :'.$this->nama;
+        echo '<br>Saldo : Rp. '.number_format($this->saldo,0, ',','.');
         echo '<hr>';
-
     }
-
 }
+
 
 
 
